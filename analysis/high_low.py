@@ -9,13 +9,6 @@ def track_high_low(data):
     - high (float): The highest price of the day.
     - low (float): The lowest price of the day.
     """
-    try:
-        high = data['High'].max()  # Find the highest price
-        low = data['Low'].min()   # Find the lowest price
-        return high, low
-    except KeyError as e:
-        print(f"KeyError: Missing column in data: {e}")
-        return None, None
-    except Exception as e:
-        print(f"Unexpected error while tracking high/low: {e}")
-        return None, None
+    high = float(data['High'].max())  # Convert to float
+    low = float(data['Low'].min())   # Convert to float
+    return high, low
