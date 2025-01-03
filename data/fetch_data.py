@@ -5,4 +5,3 @@ def get_stock_data(stock):
     if data.empty:
         print(f"Error: No data fetched for {stock}")
     return data
-
