@@ -1,27 +1,18 @@
 from config.settings import STOCKS
-from data.fetch_data import get_stock_data
-from indicators.ema import calculate_ema
-from analysis.high_low import track_high_low
-from analysis.decision import analyze_directionality
-from utils.formatter import format_output
+from data.fetch_data import fetch_historical_data
+from models.predict_high_low import predict_high_low
+from utils.formatter import format_prediction_output
 
 def main():
-    print("📈 Stock Movement Tracker\n")
+    print("📈 Stock Predictor - High/Low Prediction\n")
     for stock in STOCKS:
-        print(f"Fetching data for {stock}...")
-        data = get_stock_data(stock)
-        if data.empty:
-            print(f"No data available for {stock}\n")
-            continue
-
-        ema_8 = calculate_ema(data['Close'], 8)
-        ema_9 = calculate_ema(data['Close'], 9)
-        ema_200 = calculate_ema(data['Close'], 200)
-
-        high, low = track_high_low(data)
-        direction = analyze_directionality(ema_8, ema_9, ema_200)
-
-        output = format_output(stock, high, low, direction, ema_8, ema_9, ema_200)
+        print(f"Fetching data and predicting for {stock}...")
+        
+        # Predict high and low
+        predicted_high, predicted_low = predict_high_low(stock)
+        
+        # Display results
+        output = format_prediction_output(stock, predicted_high, predicted_low)
         print(output)
 
 if __name__ == "__main__":

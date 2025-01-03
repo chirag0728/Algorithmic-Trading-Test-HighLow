@@ -1,15 +1,10 @@
-def format_output(stock, high, low, direction, ema_8, ema_9, ema_200):
+def format_prediction_output(stock, predicted_high, predicted_low):
     output = f"""
-    ┌─────────────────────────────────────────┐
-    │               {stock} Summary              │
-    ├─────────────────────────────────────────┤
-    │ High of the Day       : {high:.2f}           │
-    │ Low of the Day        : {low:.2f}           │
-    │ Directionality        : {direction}          │
-    ├─────────────────────────────────────────┤
-    │ EMA (8)               : {ema_8:.2f}          │
-    │ EMA (9)               : {ema_9:.2f}          │
-    │ EMA (200)             : {ema_200:.2f}        │
-    └─────────────────────────────────────────┘
+    ┌──────────────────────────────────────────┐
+    │              {stock} Predictions              │
+    ├──────────────────────────────────────────┤
+    │ Predicted High       : {predicted_high:.2f}         │
+    │ Predicted Low        : {predicted_low:.2f}         │
+    └──────────────────────────────────────────┘
     """
     return output

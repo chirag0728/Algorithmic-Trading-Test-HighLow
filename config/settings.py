@@ -1,1 +1,1 @@
-STOCKS = ["SPY", "QQQ"]  # Add any tickers you want to track
+STOCKS = ["SPY", "QQQ"]  # Add your stock tickers here
