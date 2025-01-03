@@ -18,7 +18,6 @@ def train_predictive_model(stock):
     # Prepare features and targets
     print(f"Preparing features for {stock}...")
     X, y_high, y_low = prepare_features(data)
-    print(f"Features prepared: {X.shape}, High Targets: {len(y_high)}, Low Targets: {len(y_low)}")
 
     # Train/Test split
     X_train, X_test, y_train_high, y_test_high = train_test_split(X, y_high, test_size=0.2, random_state=42)

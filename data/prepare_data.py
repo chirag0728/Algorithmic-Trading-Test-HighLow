@@ -1,22 +1,24 @@
-import pandas as pd
-
 def prepare_features(data):
     """
-    Prepares features for machine learning models.
+    Prepares features for next-day stock prediction.
 
     Args:
-        data (pd.DataFrame): Raw stock data.
+        data (pd.DataFrame): Raw daily stock data.
 
     Returns:
         Tuple[pd.DataFrame, pd.Series, pd.Series]: Features (X), target high (y_high), target low (y_low).
     """
-    data['Time'] = data.index.hour * 60 + data.index.minute  # Convert time to minutes
+    data['Previous_Close'] = data['Close'].shift(1)
+    data['Previous_High'] = data['High'].shift(1)
+    data['Previous_Low'] = data['Low'].shift(1)
+    data['Previous_Open'] = data['Open'].shift(1)
+    data['Previous_Volume'] = data['Volume'].shift(1)
     data['Range'] = data['High'] - data['Low']
-    data['SMA'] = data['Close'].rolling(window=10).mean()
-    data['EMA'] = data['Close'].ewm(span=10).mean()
+    data['Volatility'] = (data['High'] - data['Low']) / data['Close']
     data.dropna(inplace=True)
 
-    X = data[['Open', 'Close', 'Volume', 'Time', 'SMA', 'EMA']]
+    # Features (X) and targets (y_high, y_low)
+    X = data[['Previous_Close', 'Previous_High', 'Previous_Low', 'Previous_Open', 'Previous_Volume', 'Volatility']]
     y_high = data['High']
     y_low = data['Low']
 
